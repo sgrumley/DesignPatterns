@@ -1,0 +1,1 @@
+This deals with inheritence, does not really apply with go
