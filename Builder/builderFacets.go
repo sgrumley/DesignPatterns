@@ -84,6 +84,17 @@ func main() {
 		AsA("Software Developer").
 		Earning(100000)
 
+	// lives and works switches builder and can be changed at any point
+	// Lives().
+		// At("24 East Street").
+		// In("Australia").
+	// Works().
+		// At("Google").
+		// AsA("Software Developer").
+		// Earning(100000).
+	// Lives().
+		//withZip("4000")
+
 	person := pb.Build()
 	fmt.Println(person)
 	// fmt.Println("ndf")
