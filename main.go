@@ -3,10 +3,14 @@
 // Update readme with general problem and solution info
 package main
 
-// import (
-// 	"github.com/sgrumley/"
-// )
+import (
+	b "patterns/Builder"
+	f "patterns/Factories"
+	s "patterns/SOLID"
+)
 
 func main() {
-
+	s.DependencyInversion()
+	b.BuilderFunctional()
+	f.FactoryFunction()
 }

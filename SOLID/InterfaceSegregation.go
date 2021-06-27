@@ -1,8 +1,6 @@
-solid main
+package solid
 
-type Document interface {
-
-}
+type Document interface{}
 
 type Machine interface {
 	Print(d Document)
@@ -10,32 +8,23 @@ type Machine interface {
 	Scan(d Document)
 }
 
-type MultiFunctionPrinter struct {
+type MultiFunctionPrinter struct{}
 
-}
+func (m MultiFunctionPrinter) Print(d Document) {}
 
-func (m MultiFunctionPrinter) Print(d Document) {
-
-}
-func (m MultiFunctionPrinter) Fax(d Document) {
-
-}
-func (m MultiFunctionPrinter) Scan(d Document) {
-
-}
+func (m MultiFunctionPrinter) Fax(d Document)  {}
+func (m MultiFunctionPrinter) Scan(d Document) {}
 
 // Even if the printer doesn't have all functionality the machine interface forces us to implement the functions
-type OldFunctionPrinter struct {
+type OldFunctionPrinter struct{}
 
-}
+func (m OldFunctionPrinter) Print(d Document) {}
 
-func (m OldFunctionPrinter) Print(d Document) {
-
-}
 // Deprecated
 func (o OldFunctionPrinter) Fax(d Document) {
 	panic("Not supported")
 }
+
 // deprecated
 func (o OldFunctionPrinter) Scan(d Document) {
 	panic("Not supported")
@@ -53,24 +42,14 @@ type Scanner interface {
 }
 
 // Only have print functionality
-type MyPrinter struct {
+type MyPrinter struct{}
 
-}
+func (m MyPrinter) Print(d Document) {}
 
-func (m MyPrinter) Print(d Document){
+type PhotoCopier struct{}
 
-}
-
-type PhotoCopier struct {
-
-}
-
-func (p PhotoCopier) Scan(d Document){
-
-}
-func (p PhotoCopier) Print(d Document){
-
-}
+func (p PhotoCopier) Scan(d Document)  {}
+func (p PhotoCopier) Print(d Document) {}
 
 // decorator
 type MultiFunctionMachine struct {
@@ -78,7 +57,6 @@ type MultiFunctionMachine struct {
 	scanner Scanner
 }
 
-func (m MultiFunctionMachine) Print(d Document){
+func (m MultiFunctionMachine) Print(d Document) {
 	m.printer.Print(d)
 }
-
