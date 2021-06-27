@@ -1,4 +1,4 @@
-package main
+solid main
 
 type Document interface {
 
@@ -82,6 +82,3 @@ func (m MultiFunctionMachine) Print(d Document){
 	m.printer.Print(d)
 }
 
-func main() {
-	
-}

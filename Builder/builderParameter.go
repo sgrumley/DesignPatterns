@@ -1,7 +1,7 @@
 // Forces the user to use the builder and keeps the email object away
 // function intializer as a parameter
 
-package main
+package builder
 
 import (
 	"fmt"
@@ -12,50 +12,50 @@ type email struct {
 	from, to, subject, body string
 }
 
-
 type EmailBuilder struct {
 	email email
 }
 
 func (b *EmailBuilder) From(from string) *EmailBuilder {
-	if !strings.Contains(from, "@"){
+	if !strings.Contains(from, "@") {
 		panic("email need @")
 	}
-	b.email.from = from;
+	b.email.from = from
 	return b
 }
 
 func (b *EmailBuilder) To(to string) *EmailBuilder {
-	
-	b.email.to = to;
+
+	b.email.to = to
 	return b
 }
 
 func (b *EmailBuilder) Subject(subject string) *EmailBuilder {
-	
-	b.email.subject = subject;
+
+	b.email.subject = subject
 	return b
 }
 
 func (b *EmailBuilder) Body(body string) *EmailBuilder {
-	
-	b.email.body = body;
+
+	b.email.body = body
 	return b
 }
 
-func sendMailImplementation(email *email){
+func sendMailImplementation(email *email) {
 	fmt.Println("email sent")
 }
 
 type build func(*EmailBuilder)
+
 func SendEmail(action build) {
 	build := EmailBuilder{}
 	action(&build)
 	sendMailImplementation(&build.email)
 }
 
-func main() {
-	SendEmail(func(b *EmailBuilder){
+func BuilderParameter() {
+	SendEmail(func(b *EmailBuilder) {
 		b.From("sgrumleydev@gmail.com").
 			To("support@rec.com").
 			Subject("Meeting").

@@ -1,4 +1,4 @@
-package main
+package solid
 
 import "fmt"
 
@@ -18,14 +18,16 @@ type Person struct {
 }
 
 type Info struct {
-	from *Person
+	from         *Person
 	relationship Relationship
-	to *Person
+	to           *Person
 }
+
 // Low level module (Basically the data)
 type RelationshipBrowser interface {
 	FindAllChildrenOf(name string) []*Person
 }
+
 type Relationships struct {
 	relations []Info
 }
@@ -67,12 +69,12 @@ type Research struct {
 // new function that depends on abstractions
 func (r *Research) Investigate() {
 
-	for _,p := range r.browser.FindAllChildrenOf("John") {
+	for _, p := range r.browser.FindAllChildrenOf("John") {
 		fmt.Println("John has a child named", p.name)
 	}
 }
 
-func main() {
+func DependencyInversion() {
 	parent := Person{"John"}
 	child1 := Person{"Mathew"}
 	child2 := Person{"Frank"}

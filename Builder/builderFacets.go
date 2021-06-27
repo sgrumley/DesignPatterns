@@ -1,8 +1,8 @@
-// Multiple builders 
+// Multiple builders
 // e.g aggregating builders under a single builder
-package main
+package builder
 
-import ( 
+import (
 	"fmt"
 )
 
@@ -11,7 +11,7 @@ type Person struct {
 	Address, Zip, City string
 	// job
 	CompanyName, Position string
-	Income int
+	Income                int
 }
 
 type PersonBuilder struct {
@@ -27,7 +27,7 @@ func (b *PersonBuilder) Works() *PersonJobBuilder {
 }
 
 func newPersonBuilder() *PersonBuilder {
-	return &PersonBuilder{ &Person{} }
+	return &PersonBuilder{&Person{}}
 }
 
 type PersonAddressBuilder struct {
@@ -35,17 +35,17 @@ type PersonAddressBuilder struct {
 }
 
 func (it *PersonAddressBuilder) At(address string) *PersonAddressBuilder {
-	it.person.Address = address;
+	it.person.Address = address
 	return it
 }
 
 func (it *PersonAddressBuilder) In(city string) *PersonAddressBuilder {
-	it.person.City = city;
+	it.person.City = city
 	return it
 }
 
 func (it *PersonAddressBuilder) withZip(zip string) *PersonAddressBuilder {
-	it.person.Zip = zip;
+	it.person.Zip = zip
 	return it
 }
 
@@ -54,17 +54,17 @@ type PersonJobBuilder struct {
 }
 
 func (it *PersonJobBuilder) At(companyName string) *PersonJobBuilder {
-	it.person.CompanyName = companyName;
+	it.person.CompanyName = companyName
 	return it
 }
 
 func (it *PersonJobBuilder) AsA(position string) *PersonJobBuilder {
-	it.person.Position = position;
+	it.person.Position = position
 	return it
 }
 
 func (it *PersonJobBuilder) Earning(income int) *PersonJobBuilder {
-	it.person.Income = income;
+	it.person.Income = income
 	return it
 }
 
@@ -72,28 +72,28 @@ func (b *PersonBuilder) Build() *Person {
 	return b.person
 }
 
-func main() {
+func BuilderFacets() {
 	pb := newPersonBuilder()
 	pb.
-	Lives().
+		Lives().
 		At("24 East Street").
 		In("Australia").
 		withZip("4000").
-	Works().
+		Works().
 		At("Google").
 		AsA("Software Developer").
 		Earning(100000)
 
 	// lives and works switches builder and can be changed at any point
 	// Lives().
-		// At("24 East Street").
-		// In("Australia").
+	// At("24 East Street").
+	// In("Australia").
 	// Works().
-		// At("Google").
-		// AsA("Software Developer").
-		// Earning(100000).
+	// At("Google").
+	// AsA("Software Developer").
+	// Earning(100000).
 	// Lives().
-		//withZip("4000")
+	//withZip("4000")
 
 	person := pb.Build()
 	fmt.Println(person)

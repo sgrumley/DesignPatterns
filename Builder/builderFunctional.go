@@ -1,7 +1,6 @@
-
 // Benefit of this method very easy to extend builder without aggregating nerw builders
 // keeps a list of actions to perform on the object then peroform at once
-package main
+package builder
 
 import (
 	"fmt"
@@ -18,15 +17,15 @@ type PersonBuilder struct {
 }
 
 func (b *PersonBuilder) Called(name string) *PersonBuilder {
-	b.actions = append(b.actions, func(p *Person){
+	b.actions = append(b.actions, func(p *Person) {
 		p.name = name
 	})
 	return b
 }
 
 func (b *PersonBuilder) WorksAsA(job string) *PersonBuilder {
-	b.actions = append(b.actions, func(p *Person){
-		p.position = job;
+	b.actions = append(b.actions, func(p *Person) {
+		p.position = job
 	})
 	return b
 }
@@ -39,7 +38,7 @@ func (b *PersonBuilder) Build() *Person {
 	return &p
 }
 
-func main() {
+func BuinderFunctional() {
 	b := PersonBuilder{}
 	p := b.Called("Sam").WorksAsA("Developer").Build()
 	fmt.Println(*p)
