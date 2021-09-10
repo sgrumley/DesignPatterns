@@ -9,12 +9,18 @@ import (
 	f "patterns/Factories"
 	p "patterns/Prototype"
 	s "patterns/SOLID"
+	sing "patterns/Singleton"
 )
 
 func main() {
+	fmt.Println("-------------------------------SOLID-------------------------------")
 	s.DependencyInversion()
+	fmt.Println("\n-------------------------------Builder-----------------------------")
 	b.BuilderFunctional()
+	fmt.Println("\n-------------------------------Factory-----------------------------")
 	f.FactoryFunction()
-	fmt.Println("Proto")
+	fmt.Println("\n-------------------------------Prototype---------------------------")
 	p.CopySerial()
+	fmt.Println("\n-------------------------------Singleton---------------------------")
+	sing.SingletonDriver()
 }
