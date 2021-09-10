@@ -83,14 +83,16 @@ func GetSingletonDatabase() Database {
 	return instance
 }
 
+// Dependency inversion as it requires GetSingletonDatabase
 func GetTotalPopulation(cities []string) int {
 	result := 0
 	for _, city := range cities {
 		result += GetSingletonDatabase().GetPopulation(city)
-	}
+	} // DIP
 	return result
 }
 
+// Solution is to use an interface to break up direct dependency
 func GetTotalPopulationEx(db Database, cities []string) int {
 	result := 0
 	for _, city := range cities {
@@ -103,6 +105,7 @@ type DummyDatabase struct {
 	dummyData map[string]int
 }
 
+// Dummy database used for unit test without integration test
 func (d *DummyDatabase) GetPopulation(name string) int {
 	if len(d.dummyData) == 0 {
 		d.dummyData = map[string]int{
